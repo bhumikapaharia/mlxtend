@@ -21,13 +21,6 @@ jobs:
     - name: Install dependencies
       run: |
         conda env update --file environment.yml --name base
-    - name: Lint with flake8
-      run: |
-        conda install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
         conda install numpy scipy scikit-learn pandas tensorflow joblib pytest
@@ -59,14 +52,11 @@ jobs:
               ~/miniconda3/bin/conda install conda-build -y && \
               ~/miniconda3/bin/conda create -q -y --name testenv python=3.8 cython numpy pytest psutil pip && \
               source ~/miniconda3/bin/activate testenv && \
-              conda env update --file environment.yml --name base
-              conda install flake8
-              flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-              flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-              conda install numpy scipy scikit-learn pandas joblib pytest
-              conda install imageio scikit-image
-              conda install -c conda-forge dlib
-              pip install markdown
-              pip install -e  .
-              pytest -sv
+              conda env update --file environment.yml --name base && \
+              conda install numpy scipy scikit-learn tensorflow pandas joblib pytest && \
+              conda install imageio scikit-image && \
+              conda install -c conda-forge dlib && \
+              pip install markdown && \
+              pip install -e  . && \
+              pytest -sv && \
               deactivate'
