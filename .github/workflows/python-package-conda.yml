@@ -63,7 +63,7 @@ jobs:
               conda install flake8
               flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
               flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-              conda install numpy scipy scikit-learn pandas tensorflow joblib pytest
+              conda install numpy scipy scikit-learn pandas joblib pytest
               conda install imageio scikit-image
               conda install -c conda-forge dlib
               pip install markdown
